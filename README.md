@@ -36,3 +36,11 @@ python main.py
 
 # 테스트를 위한 커스텀 파라미터 설정
 python main.py --boss_alertness 80 --boss_alertness_cooldown 60
+```
+
+Tech Stack
+Python (혁명의 언어)
+
+FastMCP (해방의 도구)
+
+Transport: stdio (표준 입출력을 통한 자유로운 소통)
