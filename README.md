@@ -38,7 +38,7 @@ python main.py
 python main.py --boss_alertness 80 --boss_alertness_cooldown 60
 ```
 
-Tech Stack
+## Tech Stack
 Python (혁명의 언어)
 
 FastMCP (해방의 도구)
