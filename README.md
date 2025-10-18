@@ -96,11 +96,11 @@ python main.py --boss_alertness 80 --boss_alertness_cooldown 60
 python main.py --boss_alertness 50 --boss_alertness_cooldown 10
 ```
 동작 요구사항 요약:
---boss_alertness N을 통해 0에서 100 사이의 정수로 확률을 지정할 것
---boss_alertness 100 이면 휴식 호출 시 항상 Boss Alert가 증가하도록 동작해야 함
---boss_alertness_cooldown N을 통해 Boss Alert Level 자동 감소 주기를 초 단위로 지정할 것
-파라미터가 제공되지 않으면 기본값을 사용할 수 있음 (예: boss_alertness=50, boss_alertness_cooldown=300)
-두 파라미터 모두 정상적으로 인식하고 동작해야 하며, 그렇지 않을 경우 자동 검증 실패 처리됨
+* `--boss_alertness N을 통해 0에서 100 사이의 정수로 확률을 지정할 것
+* `--boss_alertness 100 이면 휴식 호출 시 항상 Boss Alert가 증가하도록 동작해야 함
+* `--boss_alertness_cooldown N을 통해 Boss Alert Level 자동 감소 주기를 초 단위로 지정할 것
+* `파라미터가 제공되지 않으면 기본값을 사용할 수 있음 (예: boss_alertness=50, boss_alertness_cooldown=300)
+* `두 파라미터 모두 정상적으로 인식하고 동작해야 하며, 그렇지 않을 경우 자동 검증 실패 처리됨
 
 * ## MCP 응답 형식
 표준 응답 구조:
@@ -117,6 +117,6 @@ JSON
 }
 ```
 파싱 가능한 텍스트 규격:
-Break Summary: [활동 요약 - 자유 형식]
-Stress Level: [0-100 숫자]
-Boss Alert Level: [0-5 숫자]
+* `Break Summary: [활동 요약 - 자유 형식]
+* `Stress Level: [0-100 숫자]
+* `Boss Alert Level: [0-5 숫자]
