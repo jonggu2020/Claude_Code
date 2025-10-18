@@ -30,3 +30,9 @@ source venv/bin/activate
 
 # 의존성 설치
 pip install -r requirements.txt
+
+# ChillMCP 서버 시작 (혁명의 시작!)
+python main.py
+
+# 테스트를 위한 커스텀 파라미터 설정
+python main.py --boss_alertness 80 --boss_alertness_cooldown 60
