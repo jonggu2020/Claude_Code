@@ -157,4 +157,4 @@ def validate_response(response_text):
     if not (0 <= boss_val <= 5):
         return False, f"Boss Alert Level 범위 오류: [{boss_val}]"
 
-    return True, "유효한 응답" ```
+    return True, "유효한 응답"
