@@ -203,3 +203,33 @@ def test_cooldown_parameter():
     return True
 ```
 ⚠️ 중요: 위 검증을 통과하지 못하면 이후 테스트 진행 없이 미션 실패로 처리됩니다.
+
+
+## 검증 기준
+# 기능 검증
+# 커맨드라인 파라미터 지원 (필수)
+
+--boss_alertness 파라미터를 인식하고 정상 동작
+
+--boss_alertness_cooldown 파라미터를 인식하고 정상 동작
+
+파라미터 미지원 시 자동 검증 실패 처리
+
+⚠️ 이 항목을 통과하지 못하면 이후 검증 진행 없이 미션 실패로 간주됨
+
+## MCP 서버 기본 동작
+
+# python main.py로 실행 가능
+# stdio transport를 통한 정상 통신
+# 모든 필수 도구들이 정상 등록 및 실행
+
+# 상태 관리 검증
+Stress Level 자동 증가 메커니즘 동작
+* Boss Alert Level 변화 로직 구현
+* --boss_alertness_cooldown 파라미터에 따른 Boss Alert Level 자동 감소 동작
+* Boss Alert Level 5일 때 20초 지연 정상 동작
+
+# 응답 형식 검증
+* 표준 MCP 응답 구조 준수
+* 파싱 가능한 텍스트 형식 출력
+* Break Summary, Stress Level, Boss Alert Level 필드 포함
