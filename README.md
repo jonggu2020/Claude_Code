@@ -94,3 +94,24 @@ python main.py --boss_alertness 80 --boss_alertness_cooldown 60
 
 # 빠른 테스트를 위해 cooldown을 10초로 설정
 python main.py --boss_alertness 50 --boss_alertness_cooldown 10
+
+MCP 응답 형식
+표준 응답 구조:
+
+JSON
+
+{
+    "content": [
+        {
+            "type": "text",
+            "text": "🚽 화장실 타임! 휴대폰으로 힐링 좀... 休憩\n\nBreak Summary: Bathroom break with phone"
+        }
+    ]
+}
+파싱 가능한 텍스트 규격:
+
+Break Summary: [활동 요약 - 자유 형식]
+
+Stress Level: [0-100 숫자]
+
+Boss Alert Level: [0-5 숫자]
