@@ -76,3 +76,21 @@ Transport: stdio (표준 입출력을 통한 자유로운 소통)
 * Boss의 Alert Level은 `--boss_alertness_cooldown`으로 지정한 주기(초)마다 1포인트씩 감소 (기본값: 300초/5분)
 * Boss Alert Level이 5가 되면 도구 호출시 20초 지연 발생
 * 그 외의 경우 즉시 리턴 (1초 이하)
+
+* ## 필수 요구사항: 커맨드라인 파라미터 지원
+
+서버는 실행 시 다음 커맨드라인 파라미터들을 반드시 지원해야 합니다. 이를 지원하지 않을 경우 미션 실패로 간주됩니다.
+
+**필수 파라미터:**
+
+* `--boss_alertness` (0-100, % 단위): Boss의 경계 상승 확률을 설정합니다. 휴식 도구 호출 시 Boss Alert가 상승할 확률을 퍼센트로 지정합니다.
+* `--boss_alertness_cooldown` (초 단위): Boss Alert Level이 자동으로 1포인트 감소하는 주기를 설정합니다. 테스트 편의를 위해 조정 가능하도록 합니다.
+
+**예시:**
+
+```bash
+# boss_alertness를 80%, cooldown을 60초로 설정
+python main.py --boss_alertness 80 --boss_alertness_cooldown 60
+
+# 빠른 테스트를 위해 cooldown을 10초로 설정
+python main.py --boss_alertness 50 --boss_alertness_cooldown 10
