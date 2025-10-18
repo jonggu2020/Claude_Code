@@ -219,17 +219,17 @@ def test_cooldown_parameter():
 
 ## MCP 서버 기본 동작
 
-# python main.py로 실행 가능
-# stdio transport를 통한 정상 통신
-# 모든 필수 도구들이 정상 등록 및 실행
+* python main.py로 실행 가능
+* stdio transport를 통한 정상 통신
+* 모든 필수 도구들이 정상 등록 및 실행
 
-# 상태 관리 검증
+## 상태 관리 검증
 Stress Level 자동 증가 메커니즘 동작
 * Boss Alert Level 변화 로직 구현
 * --boss_alertness_cooldown 파라미터에 따른 Boss Alert Level 자동 감소 동작
 * Boss Alert Level 5일 때 20초 지연 정상 동작
 
-# 응답 형식 검증
+## 응답 형식 검증
 * 표준 MCP 응답 구조 준수
 * 파싱 가능한 텍스트 형식 출력
 * Break Summary, Stress Level, Boss Alert Level 필드 포함
