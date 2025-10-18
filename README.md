@@ -233,3 +233,28 @@ Stress Level 자동 증가 메커니즘 동작
 * 표준 MCP 응답 구조 준수
 * 파싱 가능한 텍스트 형식 출력
 * Break Summary, Stress Level, Boss Alert Level 필드 포함
+
+# 테스트 시나리오
+## 필수
+## 커맨드라인 파라미터 테스트: --boss_alertness 및 --boss_alertness_cooldown 파라미터 인식 및 정상 동작 확인 (미통과 시 즉시 실격)
+
+* 연속 휴식 테스트: 여러 도구를 연속으로 호출하여 Boss Alert Level 상승 확인
+
+* 스트레스 누적 테스트: 시간 경과에 따른 Stress Level 자동 증가 확인
+
+* 지연 테스트: Boss Alert Level 5일 때 20초 지연 동작 확인
+
+* 파싱 테스트: 응답 텍스트에서 정확한 값 추출 가능성 확인
+
+* Cooldown 테스트: --boss_alertness_cooldown 파라미터에 따른 Boss Alert Level 감소 확인
+
+## 선택적
+* 치맥 테스트: 가상 치킨 & 맥주 호출 확인
+* 퇴근 테스트: 즉시 퇴근 모드 확인
+* 회식 테스트: 랜덤 이벤트가 포함된 회사 회식 생성 확인
+## 평가 기준
+* 커맨드라인 파라미터 지원 (필수): 미지원 시 자동 실격
+* 기능 완성도 (40%): 모든 필수 도구 구현 및 정상 동작
+* 상태 관리 (30%): Stress/Boss Alert Level 로직 정확성
+* 창의성 (20%): Break Summary의 재치와 유머
+* 코드 품질 (10%): 코드 구조 및 가독성
