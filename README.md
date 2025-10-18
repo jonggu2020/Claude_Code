@@ -36,14 +36,14 @@
 
 프로젝트를 로컬 환경에서 설정하고 실행하는 방법은 다음과 같습니다.
 
-# 가상환경 생성
+가상환경 생성
 py -3.11 -m venv venv
 
-#가상환경 활성화
+가상환경 활성화
 .\venv\Scripts\activate
 
-#의존성 설치
+의존성 설치
 pip install -r requirements.txt
 
-##서버 실행
+서버 실행
 python main.py
