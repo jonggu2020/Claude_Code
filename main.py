@@ -97,7 +97,7 @@ def handle_chill_tool(tool_name: str):
         # 페널티 적용: Boss Alert Level이 5면 5초 대기 (타임아웃 방지)
         if server_state["boss_alert_level"] >= 5:
             logging.warning(f"⚠️  Boss is watching! 5 second penalty applied for {tool_name}")
-            time.sleep(5)  # 20초에서 5초로 변경
+            time.sleep(20)
 
         # 스트레스 감소 (1-100 랜덤)
         stress_reduction = random.randint(1, 100)
