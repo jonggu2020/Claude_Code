@@ -82,6 +82,11 @@ tool_responses = {
         ("📧 받은편지함 정리 중... 장바구니도 같이 정리", "Optimizing inbox workflow and online shopping cart simultaneously"),
         ("🛒 스팸메일 지우다가 쿠팡 오늘의 딜 확인 중", "Implementing efficient email management while checking flash sales"),
         ("💳 업무 메일 사이에 결제완료 메일이 섞여있어도 OK", "Streamlining communication channels and payment confirmations"),
+    ],
+    "chicken_beer": [
+        ("🍗🍺 근무중에 나와서 먹는 치맥이 제일 맛있지!", "Enjoying perfectly crispy chicken and ice-cold beer during work hours"),
+        ("🏃‍♂️ 점심시간 아니어도 괜찮아... 치맥은 언제나 옳다", "Conducting urgent team building exercise at local chicken restaurant"),
+        ("😋 상사 눈 피해서 치킨 뜯는 중... 맥주는 덤", "Attending critical business lunch meeting featuring fried poultry"),
     ]
 }
 
@@ -175,6 +180,10 @@ def email_organizing() -> str:
     """Organize emails while sneakily doing some online shopping"""
     return handle_chill_tool("email_organizing")
 
+@app.tool()
+def chicken_beer() -> str:
+    """Sneak out for chicken and beer during work hours"""
+    return handle_chill_tool("chicken_beer")
 # --- 7. 상태 변화 로직 (백그라운드 스레드) ---
 def stress_manager():
     """1분마다 스트레스 레벨을 1씩 자동으로 증가시키는 함수"""
