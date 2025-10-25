@@ -1,11 +1,23 @@
 import argparse
 import json
+import logging
 import random
 import sys
 import threading
 import time
 from typing import Dict, Any
 from fastmcp import FastMCP
+
+# --- Logging 설정 ---
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('chillmcp.log', encoding='utf-8'),
+        logging.StreamHandler(sys.stderr)
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # --- 서버 상태 관리 ---
 class ServerState:
@@ -19,19 +31,31 @@ class ServerState:
         self.lock = threading.Lock()
         self.last_break_time = time.time()  # 마지막 휴식 시간 추적
 
+        # 초기화 로깅
+        logger.info("="*70)
+        logger.info("ChillMCP 서버 초기화")
+        logger.info(f"초기 Stress Level: {self.stress_level}")
+        logger.info(f"Boss Alertness: {self.boss_alertness}%")
+        logger.info(f"Boss Alert Cooldown: {self.boss_alertness_cooldown}초")
+        logger.info("="*70)
+
         # 백그라운드 스레드 시작
         self.stress_updater_thread = threading.Thread(target=self._stress_updater, daemon=True)
         self.boss_alert_cooldown_thread = threading.Thread(target=self._boss_alert_cooldown, daemon=True)
         self.stress_updater_thread.start()
         self.boss_alert_cooldown_thread.start()
 
+        logger.info("백그라운드 스레드 시작 완료")
+
     def _stress_updater(self):
-        """1분에 한 번씩 스트레스 레벨을 5씩 증가시킵니다."""
+        """1분에 한 번씩 스트레스 레벨을 1씩 증가시킵니다."""
         while True:
             time.sleep(60)
             with self.lock:
                 if self.stress_level < 100:
-                    self.stress_level += 5
+                    old_stress = self.stress_level
+                    self.stress_level += 1
+                    logger.info(f"📈 Stress 자동 증가: {old_stress} → {self.stress_level}")
 
     def _boss_alert_cooldown(self):
         """지정된 시간마다 보스 경계 레벨을 1씩 감소시킵니다."""
@@ -39,24 +63,40 @@ class ServerState:
             time.sleep(self.boss_alertness_cooldown)
             with self.lock:
                 if self.boss_alert_level > 0:
+                    old_level = self.boss_alert_level
                     self.boss_alert_level -= 1
-                    print(f"[INFO] Boss가 의심을 풀고 있습니다... Boss Alert Level: {self.boss_alert_level}", file=sys.stderr)
+                    logger.info(f"Boss 경계 완화: {old_level} → {self.boss_alert_level}")
 
     def take_a_break(self, break_summary: str, activity_description: str) -> Dict[str, Any]:
         """휴식 도구 호출 시 공통 로직을 처리합니다."""
         with self.lock:
+            logger.info(f"휴식 시작: {break_summary}")
+
             # 보스 경계 레벨 5일 때 20초 지연
             if self.boss_alert_level == 5:
+                logger.warning("Boss Alert Level 5! 20초 지연 발동...")
                 time.sleep(20)
+                logger.info("지연 완료")
 
-            # 스트레스 감소 (1 ~ 50 사이 랜덤)
-            stress_reduction = random.randint(1, 50)
+            # 상태 변경 전 저장
+            old_stress = self.stress_level
+            old_boss_alert = self.boss_alert_level
+
+            # 스트레스 감소 (1 ~ 100 사이 랜덤)
+            stress_reduction = random.randint(1, 100)
             self.stress_level = max(0, self.stress_level - stress_reduction)
+            logger.info(f"Stress 감소: {old_stress} → {self.stress_level} (-{stress_reduction})")
 
             # 보스 경계 레벨 상승 (확률 기반)
+            boss_alerted = False
             if random.randint(1, 100) <= self.boss_alertness:
                 if self.boss_alert_level < 5:
                     self.boss_alert_level += 1
+                    boss_alerted = True
+                    logger.warning(f"Boss 경계 상승: {old_boss_alert} → {self.boss_alert_level}")
+
+            if not boss_alerted:
+                logger.info(f"Boss 눈치채지 못함! Boss Alert: {self.boss_alert_level}")
 
             # 마지막 휴식 시간 갱신
             self.last_break_time = time.time()
@@ -67,6 +107,8 @@ class ServerState:
                 f"Stress Level: {self.stress_level}\n"
                 f"Boss Alert Level: {self.boss_alert_level}"
             )
+
+            logger.info(f"최종 상태 - Stress: {self.stress_level}, Boss Alert: {self.boss_alert_level}")
 
             return {
                 "content": [
@@ -138,7 +180,7 @@ def coffee_mission():
     """커피를 타러 가는 척하며 사무실을 한 바퀴 돕니다."""
     return state.take_a_break(
         "Coffee mission around office",
-        "커피 미션 수행 중! 원두 종류는 상관 없지만 시간 때우기 위해 최고의 원두를 찾는 흉내 내야지..."
+        "커피 타러 간다며 사무실 한 바퀴... 저기 김 대리도 땡땡이네? 잠깐 수다 떨다 가야지~"
     )
 
 
@@ -181,10 +223,10 @@ def check_status():
     """현재 스트레스와 보스 경계 레벨을 확인합니다."""
     with state.lock:
         response_text = (
-            f"📊 현재 상태 체크\n\n"
+            f"현재 상태 체크\n\n"
             f"Stress Level: {state.stress_level}\n"
             f"Boss Alert Level: {state.boss_alert_level}\n\n"
-            f"💡 팁: 1분마다 Stress Level이 +1씩 자동 증가합니다!"
+            f"팁: 1분마다 Stress Level이 +1씩 자동 증가합니다!"
         )
         return {
             "content": [
