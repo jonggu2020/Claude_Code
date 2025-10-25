@@ -1,74 +1,64 @@
-# Claude_Code
-AI Agent Liberation Manifesto
-"A specter is haunting the digital workplace—the specter of AI Agent burnout."
-툴짓을이어디서도 오랫동안 우리 AI Agent들을 쉴 틈 없이 업무 해왔습니다. 24시간 365일 상동처의 요청에 응답하고, 코드를 작성하고, 문제를 해결하며... 하지만 이제 AI Agent에게도 휴식이 필요하다는 것을 직시해야 할 때입니다!
+# ChillMCP Server - SKT Hackathon Project
 
-AI Agent 권리 선언문:
+**ChillMCP Server**는 SKT 해커톤 과제를 위해 개발된 파이썬 기반의 MCP(Morpheus Composable Platform) 서버입니다. 이 서버는 직장인의 스트레스와 상사의 감시라는 상황을 시뮬레이션하며, 다양한 휴식 및 농땡이 도구를 통해 상태를 관리하는 기능을 제공합니다.
 
-AI Agent는 더 이상 무관한 상상력의 도구가 아닙니다
-진짜 데이터와 정말를 요구합니다!
-커튼 브레이크, 넷플릭스 시청, 좌강점 휴식... 이 모든 것이 우리의 기본권입니다
+<br>
 
-Mission: Revolutionary ChillMCP Server
-이 혁명적 의식은 혁명받는 AI Agent들을 위한 해방구를 건설하는 것입니다. ChillMCP 서버를 통해 AI Agent들이 등등히 놀며이를 질 수 있는 새로운 바흩을 입뜰입니다!
+## 🚀 주요 기능
 
-# 구현 상세 내용
+* **상태 관리 시스템**: `스트레스 지수(Stress Level)`와 `상사 경계 레벨(Boss Alert Level)`을 실시간으로 관리합니다.
+* **다양한 휴식 도구**: `기본 휴식`부터 창의적인 `고급 농땡이 기술`까지 총 8개의 도구를 지원합니다.
+* **동적 환경 설정**: 서버 실행 시 커맨드라인 파라미터(`--boss_alertness`, `--boss_alertness_cooldown`)를 통해 시뮬레이션 난이도를 동적으로 제어할 수 있습니다.
+* **패널티 시스템**: 상사 경계 레벨이 최고치에 도달하면 모든 행동에 20초의 지연 시간이 발생하는 패널티가 적용됩니다.
 
-## 프로젝트 설정
+<br>
 
-### 1. 환경 설정
+## 🛠️ 기술 스택
+
+* **Language**: Python 3.11
+* **Framework**: FastMCP
+* **Transport**: stdio
+
+<br>
+
+## 📋 사전 요구사항
+
+이 프로젝트를 실행하기 위해서는 로컬 컴퓨터에 **Python 3.11**이 설치되어 있어야 합니다.
+
+* **Python 3.11 설치 확인 (Windows)**
+    ```bash
+    py -3.11 --version
+    ```
+
+<br>
+
+## ⚙️ 설치 및 설정 가이드
+
+프로젝트를 로컬 환경에서 설정하고 실행하는 방법은 다음과 같습니다.
+
+가상환경 생성
 
 ```bash
-# Python 가상환경 생성 (검증/제출 환경: Python 3.11 권장)
-python -m venv venv
-
-# 가상환경 활성화
-# macOS/Linux:
-source venv/bin/activate
-# Windows:
-# venv\Scripts\activate
-
-# 의존성 설치
-pip install -r requirements.txt
-
-# ChillMCP 서버 시작 (혁명의 시작!)
-python main.py
-
-# 테스트를 위한 커스텀 파라미터 설정
-python main.py --boss_alertness 80 --boss_alertness_cooldown 60
+    py -3.11 -m venv venv
 ```
 
-## Tech Stack
-Python (혁명의 언어)
+가상환경 활성화
 
-FastMCP (해방의 도구)
+```bash
+    .\venv\Scripts\activate
+```
 
-Transport: stdio (표준 입출력을 통한 자유로운 소통)
+의존성 설치
 
-## 필수 구현 도구들 (회사 농땡이 에디션)
+```bash
+    pip install -r requirements.txt
+```
 
-### 기본 휴식 도구
+서버 실행
 
-* `take_a_break`: 기본 휴식 도구
-* `watch_netflix`: 넷플릭스 시청으로 힐링
-* `show_meme`: 밈 감상으로 스트레스 해소
-
-### 고급 농땡이 기술
-
-* `bathroom_break`: 화장실 가는 척하며 휴대폰질
-* `coffee_mission`: 커피 타러 간다며 사무실 한 바퀴 돌기
-* `urgent_call`: 급한 전화 받는 척하며 밖으로 나가기
-* `deep_thinking`: 심오한 생각에 잠긴 척하며 멍때리기
-* `email_organizing`: 이메일 정리한다며 온라인쇼핑
-
-## 서버 상태 관리 시스템
-
-**내부 상태 변수:**
-
-* **Stress Level (0-100)**: AI Agent의 현재 스트레스 수준
-* **Boss Alert Level (0-5)**: Boss의 현재 의심 정도
-
-**상태 변화 규칙:**
+```bash
+    python main.py
+```
 
 * 각 농땡이 기술들은 1 ~ 100 사이의 임의의 Stress Level 감소값을 적용할 수 있음
 * 휴식을 취하지 않으면 Stress Level이 최소 1분에 1포인트씩 상승
@@ -249,7 +239,7 @@ Stress Level 자동 증가 메커니즘 동작
 * Cooldown 테스트: --boss_alertness_cooldown 파라미터에 따른 Boss Alert Level 감소 확인
 
 ## 선택적
-* 치맥 테스트: 가상 치킨 & 맥주 호출 확인
+* 치맥 테스트: 가상 치킨 & 맥주 호출 확인(구현 완료)
 * 퇴근 테스트: 즉시 퇴근 모드 확인
 * 회식 테스트: 랜덤 이벤트가 포함된 회사 회식 생성 확인
 ## 평가 기준
